@@ -53,4 +53,19 @@ describe('Automation Exercise', () => {
         contato.verificarEnvioDeFormulario()
     })
 
+    it.only('Verificar todos os produtos e a página de detalhes do produto', () => {
+        cy.get('a[href="/products"]').click()
+        cy.get('.title').contains('All Products')
+        cy.get('.col-sm-9').should('be.visible')
+        cy.get(':nth-child(3) > .product-image-wrapper > .choose > .nav > li > a').click()
+
+        cy.get('.product-information > h2').should('have.text', 'Blue Top')
+        cy.get('.product-information > :nth-child(3)').should('have.text', 'Category: Women > Tops')
+        cy.get(':nth-child(5) > span').should('have.text', 'Rs. 500')
+        cy.get('#quantity').should('have.value', '1')
+        cy.get('.product-information > :nth-child(6)').contains('In Stock')
+        cy.get('.product-information > :nth-child(7)').contains('New')
+        cy.get('.product-information > :nth-child(8)').contains('Polo')
+    });
+
 })
